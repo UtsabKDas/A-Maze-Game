@@ -295,6 +295,7 @@ bool GameOverScreen()
 	//Quits the Game
 	return event->type == SDL_QUIT;
 }
+
 //Pop up after a level is complete. Returns True if Quitting, returns false if staying
 bool LevelCompleteScreen(int steps, int deaths)
 {

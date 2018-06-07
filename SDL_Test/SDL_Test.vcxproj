@@ -129,7 +129,6 @@
   <ItemGroup>
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="Maze.h" />
-    <ClInclude Include="MazeCoin.h" />
     <ClInclude Include="MazeDoor.h" />
     <ClInclude Include="MazeGuard.h" />
     <ClInclude Include="MazeKey.h" />
@@ -142,7 +141,6 @@
     <ClCompile Include="Coordinate.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Maze.cpp" />
-    <ClCompile Include="MazeCoin.cpp" />
     <ClCompile Include="MazeDoor.cpp" />
     <ClCompile Include="MazeGuard.cpp" />
     <ClCompile Include="MazeKey.cpp" />

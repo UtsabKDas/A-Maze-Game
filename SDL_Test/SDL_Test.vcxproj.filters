@@ -21,9 +21,6 @@
     <ClInclude Include="Maze.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MazeCoin.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MazeDoor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -54,9 +51,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Maze.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="MazeCoin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MazeDoor.cpp">
