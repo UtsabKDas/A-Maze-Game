@@ -4,6 +4,7 @@
 	objects, and the game loop that waits for inputs from the user. This game 
 	only updates what is rendered after player inputs. 
 */
+
 //C++ Libraries
 #include <iostream>
 #include <math.h>
@@ -19,9 +20,9 @@
 //Make Global variables for things that will not chagne
 
 //PNG and Text files To Use in this 
-#define IMG_TITLE "Images/Title.png"
-#define IMG_GAMEOVER "Images/GameOver.png"
-#define TEXT "Text/TitleFont.ttf"
+#define IMG_TITLE "../res/Images/Title.png"
+#define IMG_GAMEOVER "../res/Images/GameOver.png"
+#define TEXT "../res/Text/TitleFont.ttf"
 
 //Display Variables. These are kept as variables to make it easier to 
 //manipulate and change as needed
@@ -121,7 +122,7 @@ bool initialization()
 	else
 	{	
 		//Create window
-		window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, curWindowWidth, curWindowHeight, SDL_WINDOW_SHOWN);
+		window = SDL_CreateWindow("A Simple Maze Game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, curWindowWidth, curWindowHeight, SDL_WINDOW_SHOWN);
 		if (window == NULL)
 		{
 			printf("Window could not be created! SDL Error: %s\n", SDL_GetError());
@@ -212,7 +213,7 @@ void DrawTextWithAdjCenteredNumber(std::string text, std::string count, int xOff
 	int textYOffset = yOffset;
 	int textWidth = width - height;
 	int textHeight = height;
-	DrawText(text, xOffset, yOffset, textWidth, textHeight, fontSize);
+	DrawText(text, textXOffset, textYOffset, textWidth, textHeight, fontSize);
 	
 	//WriteIntPortion
 	int intXOffset = textXOffset + textWidth;
@@ -229,7 +230,7 @@ void DrawText_MultipleRows(std::vector<std::string> &text, std::vector<std::stri
 	int rowHeight = height / rowCount;
 	for (size_t i = 0; i < rowCount; i++)
 	{
-		//If the text has an associated data component to display
+		//If the text has an associated data component to display, display that data
 		if(i < data.size())
 		{
 			DrawTextWithAdjCenteredNumber(text[i], data[i], xOffset, yOffset + rowHeight * i, width, rowHeight, fontSize);
@@ -286,7 +287,7 @@ bool GameOverScreen()
 	FullScreenTexture(IMG_GAMEOVER);
 	SDL_Event * event = new SDL_Event;
 
-	while (event->key.keysym.sym != SDLK_SPACE && event->type != SDL_QUIT)
+	while (event->type != SDL_KEYDOWN && event->type != SDL_QUIT)
 	{
 		SDL_WaitEvent(event);
 	}

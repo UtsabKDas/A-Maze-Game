@@ -21,11 +21,7 @@
 
 //When To Start Obstacles
 #define TRAPS_START 2
-#define GUARDS_START 5
-
-//Define Maze Sizes
-#define STARTMAZEXSIZE 3;
-#define STARTMAZEYSIZE 3;
+#define GUARDS_START 4
 
 //Random Element Function
 template <typename T, typename A>

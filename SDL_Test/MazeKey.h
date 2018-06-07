@@ -7,7 +7,7 @@
 #pragma once
 #include "MazeObject.h"
 
-#define IMG_MAZEKEY "Images/Key.png"
+#define IMG_MAZEKEY "../res/Images/Key.png"
 class MazeKey :
 	public MazeObject
 {

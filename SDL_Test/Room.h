@@ -20,26 +20,26 @@
 #include <cmath>
 #include "SDL_image.h"
 
-#define IMG_4BORDER "Images/Room_4Border.png"
+#define IMG_4BORDER "../res/Images/Room_4Border.png"
 
-#define IMG_3BORDER_DLU "Images/Room_3Border_D_L_U.png"
-#define IMG_3BORDER_LUR "Images/Room_3Border_L_U_R.png"
-#define IMG_3BORDER_DUR "Images/Room_3Border_D_U_R.png"
-#define IMG_3BORDER_DLR "Images/Room_3Border_D_L_R.png"
+#define IMG_3BORDER_DLU "../res/Images/Room_3Border_D_L_U.png"
+#define IMG_3BORDER_LUR "../res/Images/Room_3Border_L_U_R.png"
+#define IMG_3BORDER_DUR "../res/Images/Room_3Border_D_U_R.png"
+#define IMG_3BORDER_DLR "../res/Images/Room_3Border_D_L_R.png"
 
-#define IMG_2BORDER_LU "Images/Room_2Border_L_U.png"
-#define IMG_2BORDER_UR "Images/Room_2Border_U_R.png"
-#define IMG_2BORDER_DL "Images/Room_2Border_D_L.png"
-#define IMG_2BORDER_DR "Images/Room_2Border_D_R.png"
-#define IMG_2BORDER_DU "Images/Room_2Border_D_U.png"
-#define IMG_2BORDER_LR "Images/Room_2Border_L_R.png"
+#define IMG_2BORDER_LU "../res/Images/Room_2Border_L_U.png"
+#define IMG_2BORDER_UR "../res/Images/Room_2Border_U_R.png"
+#define IMG_2BORDER_DL "../res/Images/Room_2Border_D_L.png"
+#define IMG_2BORDER_DR "../res/Images/Room_2Border_D_R.png"
+#define IMG_2BORDER_DU "../res/Images/Room_2Border_D_U.png"
+#define IMG_2BORDER_LR "../res/Images/Room_2Border_L_R.png"
 
-#define IMG_1BORDER_D "Images/Room_1Border_D.png"
-#define IMG_1BORDER_L "Images/Room_1Border_L.png"
-#define IMG_1BORDER_U "Images/Room_1Border_U.png"
-#define IMG_1BORDER_R "Images/Room_1Border_R.png"
+#define IMG_1BORDER_D "../res/Images/Room_1Border_D.png"
+#define IMG_1BORDER_L "../res/Images/Room_1Border_L.png"
+#define IMG_1BORDER_U "../res/Images/Room_1Border_U.png"
+#define IMG_1BORDER_R "../res/Images/Room_1Border_R.png"
 
-#define IMG_0BORDER "Images/Room_0Border.png"
+#define IMG_0BORDER "../res/Images/Room_0Border.png"
 
 //defines directions and is used to determine which textures to load
 //based off of the number of walls

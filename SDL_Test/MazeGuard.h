@@ -12,7 +12,7 @@
 #include "MazeObject.h"
 #include "Room.h"
 
-#define IMG_GUARD "Images/Guard.png"
+#define IMG_GUARD "../res/Images/Guard.png"
 class MazeGuard :
 	public MazeObject
 {
