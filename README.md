@@ -21,6 +21,7 @@ Contents
 		- [MazeDoor](#mazedoor)
 		- [MazeTrap](#mazetrap)
 		- [MazeGuard](#mazeguard)
+		- [Player](#player)
 - [SDL2 Libraries](#sdl2-libraries)
 - [Reflection](#reflection)
 - [Contact](#contact)
