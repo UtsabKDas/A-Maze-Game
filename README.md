@@ -124,7 +124,6 @@ The Coordinate struct is used to tell me the position of anything in the maze, i
 
 
 #### Room
----------
 
 The Room class gives us a point in the grid required to build the play area. Each Room has information about its position (`roomPos`), direction of walls (`wallDirBit`), rendering area (`roomRect`), and texture (`curRoomTexture). These help to indicate where it will be rendered and what it will look like. The maze has an `bool inMaze` that is set active once the Room has been connected to the maze by the Maze script.
 
