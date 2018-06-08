@@ -1,6 +1,6 @@
 # A Maze Game: 
 ### A C++ game project created using Visual Studio by Utsab Das
-==================================================================
+---------------------------------------------------------------
 A Maze Game is exactly what the title says. In this top-down 2D game, the player 
 navigates progressively larger procedurally generated mazes, finding the key to get to the next level while avoiding obstacles. 
 
@@ -21,9 +21,10 @@ Contents
 		- [MazeDoor](#mazedoor)
 		- [MazeTrap](#mazetrap)
 		- [MazeGuard](#mazeguard)
-- [SDL2](#sdl2ibraries)
+- [SDL2 Libraries](#sdl2-libraries)
 - [Reflection](#reflection)
 - [Contact](#contact)
+
 
 ### Intro
 -----
@@ -58,6 +59,7 @@ Created using
 
 ### Installation
 ----------------
+
 #### Getting the Project
 
 - Download the project
