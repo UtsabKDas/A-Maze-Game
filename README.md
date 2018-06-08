@@ -13,11 +13,11 @@ Contents
 - [Summary](#quick-feature-summary)
 - [Player](#player)
 - [Classes](#classes)
- - [main](#main)
- - [Room](#Room)
- - [Coordinate](#Coordinate)
- - [Maze](#Maze)
- - 
+	- [main](#main)
+ 	- [Room](#Room)
+ 	- [Coordinate](#Coordinate)
+ 	- [Maze](#Maze)
+	- 
 - [Functions](#functions)
 
 - [Contact](#contact)
@@ -60,7 +60,7 @@ Created using
 
 - Download the project
 - Open the Solution in Visual Studio 
- - Download [Visual Studio 2017] (https://www.visualstudio.com/downloads/) if needed
+ 	- Download [Visual Studio 2017] (https://www.visualstudio.com/downloads/) if needed
 - Change the Build Configuration to x86
 
 ![AltText](https://i.imgur.com/jU3OUEC.png)
@@ -85,18 +85,18 @@ OR
 ------------
 
 - Front End Menu
--- Goes into the gameplay
--- Exits the game
+	- Goes into the gameplay
+	- Exits the game
 - Interactive Player
- - Movement based off arrow keys
- - Begins with a number of lives and loses them when you:
-  - Reset the maze
-  - Hit any obstacle
- - When the player is out of lives, the game is over and the game returns to the Front End
+ 	- Movement based off arrow keys
+ 	- Begins with a number of lives and loses them when you:
+  		- Reset the maze
+  		- Hit any obstacle
+ 	- When the player is out of lives, the game is over and the game returns to the Front End
 - Procedural Game levels 
- - Procedurally generates mazes that become increasingly larger
- - Spawns obstacles in randomized locations in the level
- - Must find key to get to next level
+ 	- Procedurally generates mazes that become increasingly larger
+ 	- Spawns obstacles in randomized locations in the level
+ 	- Must find key to get to next level
 
 
 ### Classes
