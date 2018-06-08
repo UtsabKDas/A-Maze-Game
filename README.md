@@ -189,10 +189,10 @@ When the `PlayerMove` function is called, it returns a boolean `successfulMove` 
 If the move was successful, the main.cpp class has the player call its `CheckForObjects` function, with which the player checks if there is any object in the same position. If there is a key, `hasKey` is set to true. If there is an obstacle (Trap or Guard), its `playerLives` variable is decremented and it will restart at the `startRoom`. The player may also lose a life if the R key is pressed, causing the maze and player to reset and costing the player one life. 
 
 
-### SDL2
+### SDL2 Libraries
 --------
 
-SDL2 was used to actually display the game on screen. The SDL2 Libraries implemented here are
+SDL2 was used to actually display the game on screen. To display images and text onto the screen, I needed to bring in other SDL2 resources. The SDL2 Libraries implemented here are
 
 - SDL2
 - SDL2_main
@@ -203,7 +203,7 @@ SDL2 was used to actually display the game on screen. The SDL2 Libraries impleme
 ### Reflection
 ---------------
 
-I was able to learn a lot in this C++ Project. I had never used the SDL Libraries before, and I feel much more comfortable with them. I want to dive further into SDL and see how to utilize it to create a simple 2D game engine. I plan to continue working on this project to make certain areas more efficient, while also implementing more obstacles with unique behaviors, creating mazes not confined to rectangular shapes, and changing the rendering method to be more realtime rather than turn based. Ultimately, this experience taught me a lot and I hope to take it further. 
+I was able to learn a lot in this C++ Project. I had never used the SDL Libraries before, and I feel much more comfortable with them. I want to dive further into SDL and see how to utilize it to create a simple 2D game engine. I plan to continue working on this project to make certain areas more efficient, while also implementing more obstacles with unique behaviors, creating mazes not confined to rectangular shapes, and changing the rendering method to be more realtime rather than turn based. Ultimately, this experience taught me much and I hope to take it further. 
 
 
 ### Contact
