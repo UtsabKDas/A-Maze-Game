@@ -89,7 +89,7 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>if not exist $(SolutionDir)$(Configuration)\res mkdir $(SolutionDir)$(Configuration)\res
+      <Command>if not exist "$(SolutionDir)$(Configuration)\res" mkdir "$(SolutionDir)$(Configuration)\res" 
 xcopy /y /d  "$(ProjectDir)*.dll" "$(SolutionDir)$(Configuration)"
 xcopy /y /e /d  "$(ProjectDir)res" "$(SolutionDir)$(Configuration)\res"</Command>
     </PostBuildEvent>
@@ -121,7 +121,7 @@ xcopy /y /e /d  "$(ProjectDir)res" "$(SolutionDir)$(Configuration)\res"</Command
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>if not exist $(SolutionDir)$(Configuration)\res mkdir $(SolutionDir)$(Configuration)\res
+      <Command>if not exist "$(SolutionDir)$(Configuration)\res" mkdir "$(SolutionDir)$(Configuration)\res" 
 xcopy /y /d  "$(ProjectDir)*.dll" "$(SolutionDir)$(Configuration)"
 xcopy /y /e /d  "$(ProjectDir)res" "$(SolutionDir)$(Configuration)\res"</Command>
     </PostBuildEvent>

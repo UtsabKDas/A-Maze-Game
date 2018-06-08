@@ -13,8 +13,8 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_Image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>if not exist $(SolutionDir)$(Configuration)\res mkdir $(SolutionDir)$(Configuration)\res
-xcopy /y /d  "$(ProjectDir)*.dll" "$(SolutionDir)$(Configuration)"
+      <Command>if not exist "$(SolutionDir)$(Configuration)\res" mkdir "$(SolutionDir)$(Configuration)\res" 
+xcopy /y /d  "$(ProjectDir)*.dll" "$(SolutionDir)$(Configuration)" 
 xcopy /y /e /d  "$(ProjectDir)res" "$(SolutionDir)$(Configuration)\res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
