@@ -1,6 +1,5 @@
 # A Maze Game: 
-### A C++ game project created using Visual Studio
-Created by Utsab Das
+### A C++ game project created using Visual Studio by Utsab Das
 ==================================================================
 A Maze Game is exactly what the title says. In this top-down 2D game, the player 
 navigates progressively larger procedurally generated mazes, finding the key to get to the next level while avoiding obstacles. 
@@ -52,11 +51,9 @@ When all lives have been lost, the game is over, and the only options are to qui
 --------
 
 Created using 
-- Microsoft Visual C++
-
-- Microsoft Visual Studio 2017
-
-- Simple DirectMedia Layer Development Libraries (version 2.0.8)
+- **Microsoft Visual C++**
+- **Microsoft Visual Studio 2017**
+- **Simple DirectMedia Layer Development Libraries (version 2.0.8)**
 - Miss Ellen Font (TrueType Font) created by Samuel Marcius 
 	- [Font Page] (http://www.1001fonts.com/miss-ellen-font.html)
 - PNG Images created by me
@@ -82,11 +79,11 @@ OR
 
 - Build the Project (in Debug or Release)
 
-![AltText](https://imgur.com/RHPdj5Y.png)
+![AltText](https://i.imgur.com/RHPdj5Y.png)
 
 - Launch the application from your file explorer (look in the proper Output Directory)
 
-![AltText](https://imgur.com/a/2BXaRRY.png)
+![AltText](https://i.imgur.com/goMARtL.png)
 
 ### Features
 ------------
@@ -150,7 +147,6 @@ The `CarveMaze` function actually goes about creating the maze. It stores one of
 
 It continues this until it encounters a room with no `availRooms`, at which point it will pop off the top element of the vector, and check if the previous room in the path had any other available rooms. It continues this until all the rooms are `inMaze`.
 
-Maze Creation
 ![AltText](https://media.giphy.com/media/2zdVncFuJoZrQoQBAK/giphy.gif)
 
 As the rooms are placed, if the game has gone to a high enough level, the rooms where obstacles spawn will be selected and added to the `obstacleRooms` vector. These are spaced along the path a distance apart set by the `obstacleSpacing`. This number needs to be high enough so that a maze with obstacles is traversable. They are later created by the `CreateObject` function, which assigns these to the `objectsInMaze` vector. The type of obstacle created (`MazeTrap` or `MazeGuard`) is determined by the current level of the game and the number of connected rooms.
@@ -212,13 +208,16 @@ SDL2 was used to actually display the game on screen. The SDL2 Libraries impleme
 - SDL2_image
 - SDL2_ttf
 
+
 ### Reflection
 ---------------
 
 I was able to learn a lot in this C++ Project. I had never used the SDL Libraries before, and I feel much more comfortable with them. I want to dive further into SDL and see how to utilize it to create a simple 2D game engine. I plan to continue working on this project to make certain areas more efficient, while also implementing more obstacles with unique behaviors, creating mazes not confined to rectangular shapes, and changing the rendering method to be more realtime rather than turn based. Ultimately, this experience taught me a lot and I hope to take it further. 
 
+
 ### Contact
 ------------
 
 Email: utsabkdas@gmail.com
+
 Website: https://utsabkdas.wixsite.com/portfolio
