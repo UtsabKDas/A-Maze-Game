@@ -446,15 +446,6 @@ int main(int argc, char *argv[])
 				SDL_WaitEvent(gameEvent);
 
 				//If the Close Window button is pressed, quit the game
-				/*
-				if (gameEvent->type == SDL_QUIT)
-				{
-					quit = true;
-					//gameRunning = false;
-					break;
-				}
-				//If the player presses a key
-				else*/ 
 				if (gameEvent->type == SDL_KEYDOWN)
 				{
 					//Gets the Key Input
@@ -468,13 +459,9 @@ int main(int argc, char *argv[])
 					}
 
 					//If "R" was pressed, reset the maze, reset the player position, and reduce the player life count by 1
-					else if (keyInput == SDLK_r)
+					else if (keyInput == SDLK_r && curPlayer->playerLives > 1)
 					{
 						curPlayer->playerLives--;
-						if (curPlayer->playerLives == 0)
-						{
-							curGameState = GameOver;
-						}
 						curMaze->ResetMaze();
 						curPlayer->SetPlayerToStart(curMaze->FindRoomByPos(curMaze->startPos));
 					}
@@ -506,7 +493,6 @@ int main(int argc, char *argv[])
 							{
 								curGameState = LevelComplete;
 							}
-
 						}
 					}
 					else {

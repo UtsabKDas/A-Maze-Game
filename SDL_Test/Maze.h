@@ -56,7 +56,7 @@ private:
 	std::vector<std::shared_ptr<Room>> allRooms;	
 	
 	//All rooms with objects in them 
-	std::vector <std::shared_ptr<Room>> rooms_Objects;
+	std::vector <std::shared_ptr<Room>> obstacleRooms;
 	
 	//All objects in this maze
 	std::vector<std::shared_ptr<MazeObject>> objectsInMaze;
@@ -90,7 +90,7 @@ public:
 	{
 		//Clear all previous vectors
 		allRooms.clear();
-		rooms_Objects.clear();
+		obstacleRooms.clear();
 		objectsInMaze.clear();
 		
 		//Create Maze and Items in Maze
@@ -188,7 +188,7 @@ public:
 		size_t longestPath = 0;
 
 		//Checks how many rooms have been added to the maze
-		 int inMazeCounter = 0;
+		int inMazeCounter = 0;
 
 		//Points to the current room (the top of the stack) and sets it as the starting room
 		std::shared_ptr<Room> curRoomPtr = randomElement(allRooms);
@@ -231,7 +231,7 @@ public:
 					//Places rooms that can have obstacles a distance apart based off of trap spacing
 					if (currentPath.size() % obstacleSpacing == 0)
 					{
-						rooms_Objects.push_back(curRoomPtr);
+						obstacleRooms.push_back(curRoomPtr);
 					}
 				}
 			}
@@ -277,7 +277,7 @@ public:
 	//Creates objects in the maze rooms designated during the maze creation. Only called if difficulty is greater than 0
 	void CreateObjects()
 	{
-		for_each(begin(rooms_Objects), end(rooms_Objects), [&](std::shared_ptr<Room> curRoomPtr) {
+		for_each(begin(obstacleRooms), end(obstacleRooms), [&](std::shared_ptr<Room> curRoomPtr) {
 			if(curRoomPtr->roomTypes.size() == 0)
 			{
 				//If difficulty is 2 or higher and the room has 3 connected rooms, create a guard

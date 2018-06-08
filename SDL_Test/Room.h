@@ -46,11 +46,7 @@ enum directions {down = 0b0001, left = 0b0010, up = 0b0100, right = 0b1000};
 
 //Used to determine what rooms may do in the maze
 enum RoomType{None, Start, Final, Key, Trap, Guard };
-static const char* textureFileNames[] =
-{ IMG_0BORDER ,IMG_1BORDER_D, IMG_1BORDER_L, IMG_2BORDER_DL,
-IMG_1BORDER_U, IMG_2BORDER_DU, IMG_2BORDER_LU, IMG_3BORDER_DLU,
-IMG_2BORDER_DR, IMG_2BORDER_DR, IMG_2BORDER_LR, IMG_3BORDER_DLR,
-IMG_2BORDER_UR, IMG_3BORDER_DUR, IMG_3BORDER_LUR, IMG_4BORDER };
+
 class Room
 {
 private:
@@ -58,7 +54,6 @@ private:
 
 public:
 
-	RoomType roomType = None;
 	std::vector<RoomType> roomTypes;
 	
 	//Position of Rooms
