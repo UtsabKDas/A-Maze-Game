@@ -25,7 +25,6 @@ Contents
 - [SDL2](#SDL2Libraries)
 - [Reflection](#Reflection)
 - [Contact](#contact)
-- [License](#license)
 
 ### Intro
 -----
@@ -107,7 +106,6 @@ OR
 -------
 
 #### main
----------
 
 The main.cpp class initializes the game and has the gameplay loops. This class handles creating the window and renderer, rendering the objects and displaying information. The `int main` function carries out the brunt of the game. If initialization is successful, then the game goes into the main game while loop, which carries out actually playing the game. Inside this loop, there are four sub-while loops delineating different states of the game: Front End, Gameplay, Level Complete, and Game Over. If at any of these points, the player closes the window, the game quits all loops and will end. 
 
@@ -121,7 +119,6 @@ If the player runs out of lives at any point, `curGameState` is set to `GameOver
 
 
 #### Coordinate
----------------
 
 The Coordinate struct is used to tell me the position of anything in the maze, including Rooms, any Maze Objects (Traps, Guards, Keys and Doors), and the Player.
 
@@ -137,27 +134,26 @@ The `wallDirBit` is used to determine both what sides the room has walls as well
 
 When a Room is created, `wallDirbit` is initialized to `0b1111` (15), which indicates that all sides have walls. As the Maze script calls the room's `ConnectRoom` script, which connects this room to another and then calls the `RemoveWallDirection` function will remove the necessary walls to ensure that the correct texture can be assigned.
 
+The Room also has an enum called `RoomType` which has enumerations `{None, Start, Final, Key, Trap, Guard }`, referring to the different kinds of rooms that could exist. Each room has a vector of these called `roomTypes`. When a player enters a room, it will check these types to determine what must be done (i.e. picking up a key, losing a life, etc.). 
 
 #### Maze
----------
 
 The Maze class creates the actual maze of the game. It begins this process by using the `CreateRooms` function to create a grid of rooms, giving each a unique position, and storing them in a vector called `allRooms`. These rooms are initialized as described above, and are not yet in the maze.
 
-The `CarveMaze` function actually goes about creating the maze. It stores one of the rooms at random in `curRoomPtr`, puts it into a `currentPath` vector, and uses a backtracking algorithm to carve out the maze. It selects one Room at random as the start point and then selects one of its `availRooms` as the next room in the maze, removing the selection from `availRooms` in the process, as well as removing itself from the newly connected room's `availRooms`. 
+The `CarveMaze` function actually goes about creating the maze. It stores one of the rooms at random in `curRoomPtr`, puts it into a `currentPath` vector, and uses a backtracking algorithm to carve out the maze. It selects one Room at random as the start point (adding 'Start' to that room's `roomTypes`) and then selects one of its `availRooms` as the next room in the maze, removing the selection from `availRooms` in the process, as well as removing itself from the newly connected room's `availRooms`. 
 
 It continues this until it encounters a room with no `availRooms`, at which point it will pop off the top element of the vector, and check if the previous room in the path had any other available rooms. It continues this until all the rooms are `inMaze`.
 
 ![AltText](https://media.giphy.com/media/2zdVncFuJoZrQoQBAK/giphy.gif)
 
-As the rooms are placed, if the game has gone to a high enough level, the rooms where obstacles spawn will be selected and added to the `obstacleRooms` vector. These are spaced along the path a distance apart set by the `obstacleSpacing`. This number needs to be high enough so that a maze with obstacles is traversable. They are later created by the `CreateObject` function, which assigns these to the `objectsInMaze` vector. The type of obstacle created (`MazeTrap` or `MazeGuard`) is determined by the current level of the game and the number of connected rooms.
+As the rooms are placed, if the game has gone to a high enough level, the rooms where obstacles spawn will be selected and added to the `obstacleRooms` vector. These are spaced along the path a distance apart set by the `obstacleSpacing`. This number needs to be high enough so that a maze with obstacles is traversable. They are later created by the `CreateObject` function, which assigns these to the `objectsInMaze` vector. The type of obstacle created (`MazeTrap` or `MazeGuard`) is determined by the current level of the game and the number of connected rooms. Whatever type is created is added to the room's 'roomTypes' variable
 
-The Maze also keeps track of the longest path. It uses this to find set `finalPos` as the furthest distance away, which is used to set the `finalRoom`. A `MazeDoor` object is created there as the way to the next level. After the objects and door are in place, the Maze Key object is created by chosing a random room that is not equal to the starting or ending position for the maze.
+The Maze also keeps track of the longest path. It uses this to find set `finalPos` as the furthest distance away, which is used to set the `finalRoom`. A `MazeDoor` object is created there as the way to the next level. After the objects and door are in place, a `MazeKey` object is created by chosing a random room that is not equal to the starting or ending position for the maze. As these objects are placed, the associated room's 'roomTypes' variable is changed accordingly. 
 
 After the maze is created, it is still used to update the game during every movement. The `NextMazeCycle` function calls the `NextCycle` function in all members of `objectsInMaze`, causing any objects to perform their behaviors. Additionally, the Maze controls the rendering of all the Rooms and Obstacles within it via its `AddMazeRoomsToRenderer` and `AddMazeObstaclesToRenderer` functions, making each room and object call its own `AddRoomToRenderer` and `AddObjToRenderer` functions, respectively.
 
 
 #### MazeObject
----------------
 
 The MazeObject class is inherited by numerous other classes (`Player`, `MazeTrap`, `MazeGuard`, `MazeDoor`, `MazeKey`). It is primarily used to store the data that would be common amongst any object that appears in the Maze, namely a position (`objPos`) a pointer to its room (`curObjRoom`), its on screen location (`objRect`), its current texture (`curObjTexture`), and a pointer to the renderer (`objRenderer).
 
@@ -165,37 +161,32 @@ It has `SetObjRoom` and `SetObjectRect` functions for setting the object's room 
 
 
 ##### MazeKey
--------------
 
-The MazeKey is the object used to represent the key in game used to open up the MazeDoor.
+The MazeKey is the object used to represent the key in game used to open up the MazeDoor. 
 
 
 ##### MazeDoor
---------------
 
 The MazeDoor is the object used to represent the lock in the game that you must reach in order to get to the next level. The player needs to have the key to open the lock and reach the next level.
 
 
 ##### MazeTrap
--------------
 
 The MazeTrap class defines an obstacle the player can encounter in the maze. It activates based off of its `curTrapTime` and `maxTrapTime`. The `curTrapTime` is incremented by `NextCycle` (every game cycle). After it becomes larger than the `maxTrapTime`, it resets to 0 and activates the Trap, changing its texture for rendering and making the room harmful to the player. 
 
 
 ##### MazeGuard
----------------
 
 The MazeGuard is another obstacle the player can encounter in the maze. The MazeGuard will only be created next to a room with three connected rooms. The MazeGuard maintains that room as its center (`guardCenterRoomPtr`) while moving between its three connected rooms (`guardCurRoomPtr). Just like an active trap, it will make the room it currently occupies harmful to the player.
 
 
 ##### Player
-------------
 
-The Player class creates the controllable player to the maze. When each level starts, the player has a `startRoom` variable set, so that the player knows where to respawn if they die. Additionally, the player `bool hasKey` is set to false.
+The Player class creates the controllable player to the maze. When each level starts, the player has a `startRoom` variable set, so that the player knows where to begin and where to respawn if they die in that level. Additionally, the player `bool hasKey` is set to false.
 
 When the `PlayerMove` function is called, it returns a boolean `successfulMove` based off if the movement is possible or not. If the player moves in the direction of a wall, then the movement will fail, and the player will only change its texture to face the proper direction. If the player moves in the direction of a connectRoom relative to the player's current room, the move is successful. 
 
-If the move was successful, the main.cpp class has the player call its `CheckForObjects` function, with which the player checks if there is any object in the same position. If there is a key, `hasKey` is set to true. If there is an obstacle (Trap or Guard) the player loses a life and will restart at the startRoom.
+If the move was successful, the main.cpp class has the player call its `CheckForObjects` function, with which the player checks if there is any object in the same position. If there is a key, `hasKey` is set to true. If there is an obstacle (Trap or Guard), its `playerLives` variable is decremented and it will restart at the `startRoom`. The player may also lose a life if the R key is pressed, causing the maze and player to reset and costing the player one life. 
 
 
 ### SDL2
