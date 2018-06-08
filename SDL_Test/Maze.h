@@ -11,13 +11,14 @@
 */
 
 #pragma once
+
+#include <random>
+
 #include "Room.h"	
 #include "MazeTrap.h"
 #include "MazeKey.h"
 #include "MazeDoor.h"
 #include "MazeGuard.h"
-
-#include <random>
 
 //When To Start Obstacles
 #define TRAPS_START 2
@@ -38,9 +39,9 @@ class Maze
 {
 
 private:
-	//X and Y size of maze
-	size_t mazeX_RoomCount;
-	size_t mazeY_RoomCount;
+	//X and Y counts of the maze (total rooms = X*Y)
+	int mazeX_RoomCount;
+	int mazeY_RoomCount;
 	
 	//Information about rendering size for the maze
 	int mazeX_Offset;
@@ -65,6 +66,7 @@ private:
 
 	//Renderer for the maze
 	SDL_Renderer * mazeRenderer = NULL;
+
 public:	
 	int mazeLevel;	//Current Game Level
 
@@ -72,11 +74,12 @@ public:
 	std::shared_ptr<MazeKey> mazeKeyPtr;
 	//Points to the Door Object in this maze
 	std::shared_ptr<MazeDoor> mazeDoorPtr;	
+	
 	//Start and End Position of Maze
 	Coordinate startPos;
 	Coordinate finalPos;
 
-
+	//Constructors and Destructors
 	Maze(int xCount, int yCount, int xOffset, int yOffset, int xSize, int ySize, SDL_Renderer * renderer, int level, bool showCreation);
 	Maze(const Maze &other);
 	Maze();
@@ -90,6 +93,7 @@ public:
 		rooms_Objects.clear();
 		objectsInMaze.clear();
 		
+		//Create Maze and Items in Maze
 		CreateRooms();
 		CarveMaze();
 		if (mazeLevel > TRAPS_START)
@@ -143,9 +147,9 @@ public:
 		directions allDir[] = { up, left, down, right };
 
 		//Creates all the rooms
-		for (size_t x = 0; x < mazeX_RoomCount; x++)
+		for (int x = 0; x < mazeX_RoomCount; x++)
 		{
-			for (size_t y = 0; y < mazeY_RoomCount; y++)
+			for (int y = 0; y < mazeY_RoomCount; y++)
 			{
 				std::shared_ptr<Room> newPtr(new Room(Coordinate(x, y), mazeRenderer));
 				newPtr->MakeRoomRect(mazeX_Offset, mazeY_Offset, mazeX_RoomCount, mazeY_RoomCount, mazeX_Size, mazeY_Size);
@@ -181,16 +185,16 @@ public:
 		std::vector<std::shared_ptr<Room>> currentPath;
 		
 		//Integer that tells us how long the longest path currently is
-		unsigned int longestPath = 0;
+		size_t longestPath = 0;
 
 		//Checks how many rooms have been added to the maze
-		unsigned int inMazeCounter = 0;
+		 int inMazeCounter = 0;
 
 		//Points to the current room (the top of the stack) and sets it as the starting room
 		std::shared_ptr<Room> curRoomPtr = randomElement(allRooms);
 		startPos = curRoomPtr->roomPos;
-		curRoomPtr->roomType = Start;
 		curRoomPtr->roomTypes.push_back(Start);
+
 		while (inMazeCounter < mazeX_RoomCount * mazeY_RoomCount)
 		{
 			//If the current room is not in the maze yet, put it into the maze and remove it from any available rooms vectors on adjacent rooms
@@ -230,8 +234,8 @@ public:
 						rooms_Objects.push_back(curRoomPtr);
 					}
 				}
-				
 			}
+
 			//Find the next room if there is one available and connect the current and next room together
 			if (!curRoomPtr->availRooms.empty())
 			{
@@ -266,7 +270,6 @@ public:
 		//Places the exit to the maze
 		std::shared_ptr<Room> finalRoom = FindRoomByPos(finalPos);
 		mazeDoorPtr = std::shared_ptr<MazeDoor>(new MazeDoor(finalRoom));
-		finalRoom->roomType = Final;
 		finalRoom->roomTypes.push_back(Final);
 
 	}
@@ -275,7 +278,7 @@ public:
 	void CreateObjects()
 	{
 		for_each(begin(rooms_Objects), end(rooms_Objects), [&](std::shared_ptr<Room> curRoomPtr) {
-			if(curRoomPtr->roomType == None)
+			if(curRoomPtr->roomTypes.size() == 0)
 			{
 				//If difficulty is 2 or higher and the room has 3 connected rooms, create a guard
 				if (curRoomPtr->connectRooms.size() == 3 && mazeLevel > GUARDS_START)
@@ -300,7 +303,7 @@ public:
 		do
 		{
 			curRoomPtr = randomElement(allRooms);
-		} while (curRoomPtr->roomType == Final|| curRoomPtr->roomType == Start);
+		} while (curRoomPtr->roomTypes.size() > 0);
 		
 		mazeKeyPtr = std::shared_ptr<MazeKey>(new MazeKey(curRoomPtr));
 		curRoomPtr->roomTypes.push_back(Key);
@@ -322,6 +325,12 @@ public:
 		}
 	}
 
+	//Adds an outline of the maze area to the renderer
+	void MazeOutline()
+	{
+		SDL_Color color = { 255, 255, 255, 255 };
+		SDL_RenderDrawRect(mazeRenderer, &mazeRect);
+	}
 
 	//Adds each room and an outline to the renderer
 	void AddMazeRoomsToRenderer(int delay)
@@ -333,13 +342,6 @@ public:
 		MazeOutline();
 	}
 	
-	//Adds an outline of the maze area to the renderer
-	void MazeOutline()
-	{
-		SDL_Color color = { 255, 255, 255, 255 };
-		SDL_RenderDrawRect(mazeRenderer, &mazeRect);
-	}
-
 	//Renders the objects (traps and guards) that are in the maze
 	void AddMazeObstaclesToRenderer()
 	{

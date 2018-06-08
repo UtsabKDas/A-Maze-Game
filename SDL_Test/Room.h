@@ -8,7 +8,6 @@
 	which represents how what directions around the room have walls.
 */
 
-
 #pragma once
 #include "Coordinate.h"
 #include <vector>
@@ -47,11 +46,15 @@ enum directions {down = 0b0001, left = 0b0010, up = 0b0100, right = 0b1000};
 
 //Used to determine what rooms may do in the maze
 enum RoomType{None, Start, Final, Key, Trap, Guard };
-
+static const char* textureFileNames[] =
+{ IMG_0BORDER ,IMG_1BORDER_D, IMG_1BORDER_L, IMG_2BORDER_DL,
+IMG_1BORDER_U, IMG_2BORDER_DU, IMG_2BORDER_LU, IMG_3BORDER_DLU,
+IMG_2BORDER_DR, IMG_2BORDER_DR, IMG_2BORDER_LR, IMG_3BORDER_DLR,
+IMG_2BORDER_UR, IMG_3BORDER_DUR, IMG_3BORDER_LUR, IMG_4BORDER };
 class Room
 {
 private:
-	static SDL_Texture * roomTextures[16];
+	static SDL_Texture * roomTextures[];
 
 public:
 
@@ -85,7 +88,7 @@ public:
 	~Room();
 
 	//Create Room Rect
-	void MakeRoomRect(int &xOffset, int &yOffset, unsigned int & xSplits, unsigned int & ySplits, const int &mazeWidth, const int &mazeHeight)
+	void MakeRoomRect(int &xOffset, int &yOffset, int & xSplits, int & ySplits, const int &mazeWidth, const int &mazeHeight)
 	{
 		roomRect = {
 			xOffset + (int)((roomPos.xPos)* ceil(mazeWidth / xSplits)),
@@ -137,7 +140,7 @@ public:
 		RemoveWallDirection(roomToConnectPtr);
 	}
 
-	//Adds room to Renderer. If it has a delay, render immediately after waiting.
+	//Adds room to Renderer. If it has a delay, render after waiting. 
 	void AddRoomToRenderer(int delay)
 	{
 		SDL_RenderCopy(roomRenderer, curRoomTexture, NULL, &roomRect);
@@ -146,14 +149,8 @@ public:
 			SDL_Delay(delay);
 			SDL_RenderPresent(roomRenderer);
 		}
-		/*
-		if (roomObjects.size() > 0)
-		{
-			for_each(begin(roomObjects), end(roomObjects), [](std::shared_ptr<MazeObject> curMazeObject) {
-				curMazeObject->AddObjToRenderer();
-			});
-		}*/
 	}
+
 	void AddRoomToRenderer()
 	{
 		AddRoomToRenderer(0);

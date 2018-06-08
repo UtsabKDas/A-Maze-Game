@@ -2,13 +2,10 @@
 
 SDL_Texture *  Room::roomTextures[16];
 
-//
-
 Room::Room(Coordinate pos, SDL_Renderer * renderer) : roomPos(pos)
 {
 	roomRenderer = renderer;
-	
-	//Load All Textures
+
 	if(roomTextures[0] == NULL)
 	{
 		roomTextures[0b0000] = IMG_LoadTexture(roomRenderer, IMG_0BORDER);		//None
@@ -35,7 +32,6 @@ Room::Room(Coordinate pos, SDL_Renderer * renderer) : roomPos(pos)
 	curRoomTexture = roomTextures[0b1111];
 }
 
-
 Room::Room(const Room &other) :
 	roomPos(other.roomPos),
 	roomRect(other.roomRect), 
@@ -47,7 +43,6 @@ Room::Room(const Room &other) :
 
 Room::~Room()
 {
-	std::cout << "Room Destructor for Room " << roomPos.xPos << ", " << roomPos.yPos << std::endl;
 }
 
 

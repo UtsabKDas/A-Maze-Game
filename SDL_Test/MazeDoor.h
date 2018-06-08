@@ -3,8 +3,6 @@
 	to reach. It is represented by a Lock texture and is placed into the 
 	room that is furthest from the starting room in the maze (done when 
 	creating the maze in the Maze class). 
-
-	
 */
 
 #pragma once

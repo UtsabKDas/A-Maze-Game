@@ -1,6 +1,6 @@
 /*
-	A data structure that holds coordinate information. It is used by
-	the Rooms, MazeObjects, and classes derived from MazeObjects
+	The Coordinate struct is a data structure that holds coordinate information. 
+	It is used by the Rooms, MazeObjects, and classes derived from MazeObjects
 */
 
 #pragma once

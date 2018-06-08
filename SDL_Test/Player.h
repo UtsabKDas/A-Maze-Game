@@ -1,6 +1,13 @@
 /*
 	The Player class creates a player that exists within the maze and 
-	can navigate through using the PlayerMove function. 
+	can navigate through using the PlayerMove function. This takes
+	arrow key inputs from the user to move the player. The texture
+	will change depending upon what direction the player should face
+	based off the PlayerMove function
+
+	The player will reset to the start of the maze if they encounter 
+	any traps or guards and loses a life. If the player loses all of 
+	their lives, the Game Over occurs. 
 */
 
 #pragma once
@@ -16,12 +23,8 @@ class Player :
 	public MazeObject
 {
 private:
-	SDL_Texture * playerUp;
-	SDL_Texture * playerDown;
-	SDL_Texture * playerRight;
-	SDL_Texture * playerLeft;
+	static SDL_Texture * playerTextures[4];
 	std::shared_ptr<Room> startRoom;
-	//std::shared_ptr<int> playerLives;
 public:
 	int playerLives = 10;
 
@@ -56,29 +59,30 @@ public:
 	{
 		bool successfulMove = false;
 		Coordinate testPos = objPos;
+		
 		switch (key)
 		{
 		case SDLK_UP:
 			testPos.yPos--;
-			curObjTexture = playerUp;
 			break;
 		case SDLK_DOWN:
 			testPos.yPos++;
-			curObjTexture = playerDown;
 			break;
 		case SDLK_LEFT:
 			testPos.xPos--;
-			curObjTexture = playerLeft;
 			break;
 		case SDLK_RIGHT:
 			testPos.xPos++;
-			curObjTexture = playerRight;
 			break;
 		default:
 			std::cout << "Not a valid input!" << std::endl;
 			return successfulMove;
 			break;
 		}
+
+		//Sets player texture based on key input
+		curObjTexture = playerTextures[key % 4];
+
 		//Check if the room the player is trying to move to is one of the connected rooms
 		auto iter = std::find_if(begin(curObjRoom->connectRooms), end(curObjRoom->connectRooms), [&testPos](std::shared_ptr<Room> nextRoom) {
 			return nextRoom->roomPos == testPos;

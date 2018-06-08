@@ -1,17 +1,18 @@
 #include "Player.h"
 
+SDL_Texture * Player::playerTextures[];
+
 Player::Player(std::shared_ptr<Room> setRoom, SDL_Renderer * renderer) :
 	MazeObject::MazeObject(setRoom), startRoom(setRoom)
 {
-	if(playerUp == NULL)
-		playerUp = IMG_LoadTexture(objRenderer, IMG_PLAYER_UP);
-	if (playerDown == NULL)
-		playerDown = IMG_LoadTexture(objRenderer, IMG_PLAYER_DOWN);
-	if (playerRight == NULL)
-		playerRight = IMG_LoadTexture(objRenderer, IMG_PLAYER_RIGHT);
-	if (playerLeft == NULL)
-		playerLeft = IMG_LoadTexture(objRenderer, IMG_PLAYER_LEFT);
-	curObjTexture = playerUp;
+	if (playerTextures[0] == NULL)
+	{
+		playerTextures[0] = IMG_LoadTexture(objRenderer, IMG_PLAYER_LEFT);
+		playerTextures[1] = IMG_LoadTexture(objRenderer, IMG_PLAYER_DOWN);
+		playerTextures[2] = IMG_LoadTexture(objRenderer, IMG_PLAYER_UP);
+		playerTextures[3] = IMG_LoadTexture(objRenderer, IMG_PLAYER_RIGHT);
+	}
+	curObjTexture = playerTextures[0];
 }
 Player::Player()
 {

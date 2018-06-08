@@ -22,7 +22,7 @@
 //PNG and Text files To Use in this 
 #define IMG_TITLE "../res/Images/Title.png"
 #define IMG_GAMEOVER "../res/Images/GameOver.png"
-#define TEXT "../res/Text/TitleFont.ttf"
+#define TEXTFILE "../res/Text/TitleFont.ttf"
 
 //Display Variables. These are kept as variables to make it easier to 
 //manipulate and change as needed
@@ -157,34 +157,32 @@ void FullScreenTexture(const char* fileName)
 	SDL_Texture* screenTexture = IMG_LoadTexture(renderer, fileName);
 	if (screenTexture == NULL)
 	{
-		printf("SDL could not load the Texture");
+		printf("SDL could not load the Texture from ");
+		printf(fileName);
 		return;
 	}
 	SDL_RenderCopy(renderer, screenTexture, NULL, &FullScreen);
 	SDL_RenderPresent(renderer);
 }
 
-//Draw Text based off parameters passed
-void DrawText(std::string text, int xOffset, int yOffset, int width, int height, int fontSize)
+//Draw Text On Screen in a set, boxed area
+void DrawTextFromRect(std::string text, SDL_Rect * textRect, int fontSize)
 {
 	//Select Font and Color
-	TTF_Font *font = TTF_OpenFont(TEXT, fontSize);
+	TTF_Font *font = TTF_OpenFont(TEXTFILE, fontSize);
+	if (font == NULL)
+	{
+		printf("SDL could not load the Font from ");
+		printf(TEXTFILE);
+		return;
+	}
 	SDL_Color fontColor = { 255, 255, 255, 255 };
 
-	//Create Rect where Text will go
-	SDL_Rect textRect = { 
-		xOffset,
-		yOffset,
-		width,
-		height 
-	};
-	
-	//Create Text Surface
 	SDL_Surface * textSurface = TTF_RenderText_Solid(font, text.c_str(), fontColor);
 
 	//Offsets required to make the text the proper size and scale on screen
-	int text_xOffset = textRect.x + (textRect.w - textSurface->w) / 2;
-	int text_yOffset = textRect.y + (textRect.h - textSurface->h) / 2;
+	int text_xOffset = textRect->x + (textRect->w - textSurface->w) / 2;
+	int text_yOffset = textRect->y + (textRect->h - textSurface->h) / 2;
 
 	//Creates Texture and Rect for displaying texture
 	SDL_Texture * textTexture = SDL_CreateTextureFromSurface(renderer, textSurface);
@@ -192,16 +190,23 @@ void DrawText(std::string text, int xOffset, int yOffset, int width, int height,
 
 	//Adds Texture and Outline to Renderer
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-	SDL_RenderFillRect(renderer, &textRect);
+	SDL_RenderFillRect(renderer, textRect);
 	SDL_RenderCopy(renderer, textTexture, NULL, &DisplayTextRect);
 	SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-	SDL_RenderDrawRect(renderer, &textRect);
+	SDL_RenderDrawRect(renderer, textRect);
 }
 
-//Draw Text On Screen in a set, boxed area
-void DrawText(std::string text, SDL_Rect * textRect, int fontSize)
+//Draw Text based off parameters passed
+void DrawTextFromRectParams(std::string text, int xOffset, int yOffset, int width, int height, int fontSize)
 {
-	DrawText(text, textRect->x, textRect->y, textRect->w, textRect->h, fontSize);
+	//Create Rect where Text will go
+	SDL_Rect textRect = { 
+		xOffset,
+		yOffset,
+		width,
+		height 
+	};
+	DrawTextFromRect(text, &textRect, fontSize);
 }
 
 //Draw Text on Screen that has a number next to it. This is more for visual 
@@ -213,31 +218,31 @@ void DrawTextWithAdjCenteredNumber(std::string text, std::string count, int xOff
 	int textYOffset = yOffset;
 	int textWidth = width - height;
 	int textHeight = height;
-	DrawText(text, textXOffset, textYOffset, textWidth, textHeight, fontSize);
+	DrawTextFromRectParams(text, textXOffset, textYOffset, textWidth, textHeight, fontSize);
 	
 	//WriteIntPortion
 	int intXOffset = textXOffset + textWidth;
 	int intYOffset = yOffset;
 	int intWidth = height;
 	int intHeight = height;
-	DrawText(count, intXOffset, intYOffset, intWidth, intHeight, fontSize);	
+	DrawTextFromRectParams(count, intXOffset, intYOffset, intWidth, intHeight, fontSize);	
 }
 
 //Adds Multiple Rows of Text to the Renderer. 
 void DrawText_MultipleRows(std::vector<std::string> &text, std::vector<std::string> &data, int xOffset, int yOffset, int width, int height, int fontSize)
 {
-	size_t rowCount = text.size();
+	int rowCount = text.size();
 	int rowHeight = height / rowCount;
-	for (size_t i = 0; i < rowCount; i++)
+	for (int i = 0; i < rowCount; i++)
 	{
 		//If the text has an associated data component to display, display that data
-		if(i < data.size())
+		if(i < static_cast<int>( data.size()))
 		{
 			DrawTextWithAdjCenteredNumber(text[i], data[i], xOffset, yOffset + rowHeight * i, width, rowHeight, fontSize);
 		}
 		else
 		{
-			DrawText(text[i], xOffset, yOffset + rowHeight * i, width, rowHeight, fontSize);
+			DrawTextFromRectParams(text[i], xOffset, yOffset + rowHeight * i, width, rowHeight, fontSize);
 		}
 	}
 }
@@ -247,7 +252,7 @@ void DrawInGameGUI(std::string level, std::string steps, std::string lives)
 {
 	std::vector<std::string> infoTexts = {"Level", "Steps", "Lives", "R to Reset", "ESC to Menu" };
 	std::vector<std::string> dataTexts =  { level, steps, lives };
-	DrawText("A MAZE GAME", &GameTitleFillRect, GameTitle_FontSize);
+	DrawTextFromRect("A MAZE GAME", &GameTitleFillRect, GameTitle_FontSize);
 	DrawText_MultipleRows(infoTexts, dataTexts, GameInfo_xOffset, GameInfo_yOffset, GameInfo_Width, GameInfo_Height, 42);
 }
 
@@ -308,7 +313,7 @@ bool LevelCompleteScreen(int steps, int deaths)
 	SDL_RenderDrawRect(renderer, &levelCompleteFillRect);
 
 	//Add Title To Renderer
-	DrawText("Level Complete!", &levelCompleteTitleRect, LevelComplete_FontSize);
+	DrawTextFromRect("Level Complete!", &levelCompleteTitleRect, LevelComplete_FontSize);
 
 	//Information in Level Complete Panel
 	std::vector<std::string> levelComplete_TextRows = { "Steps Taken", "Lives Lost", "Press Space To Continue" };

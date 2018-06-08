@@ -11,10 +11,15 @@ MazeGuard::MazeGuard(std::shared_ptr<Room> setRoom) :
 	if (guardTexture == NULL)
 	{
 		guardTexture = IMG_LoadTexture(objRenderer, IMG_GUARD);
+		if (guardTexture == NULL)
+		{
+			printf("SDL could not load the Texture from ");
+			printf(IMG_GUARD);
+			return;
+		}
 	}
 	curObjTexture = guardTexture;
 }
-
 
 MazeGuard::~MazeGuard()
 {

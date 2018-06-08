@@ -1,6 +1,5 @@
 #include "MazeObject.h"
 
-
 MazeObject::MazeObject(std::shared_ptr<Room> room) :
 	curObjRoom(room),
 	objRenderer(room->roomRenderer),
@@ -16,6 +15,7 @@ MazeObject::MazeObject(const MazeObject &other):
 	curObjRoom(other.curObjRoom)
 {	
 }
+
 MazeObject::MazeObject()
 {
 }

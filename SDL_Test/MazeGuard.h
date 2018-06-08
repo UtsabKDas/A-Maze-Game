@@ -27,33 +27,26 @@ public:
 	MazeGuard(std::shared_ptr<Room> setRoom);
 	~MazeGuard();
 
-	//Call after the maze is fully created to set the initial room of the enemy
-
-
+	//Updates Guard Location Each Cycle
 	void NextCycle()
 	{
-		(*guardIter)->roomType = None;
-		auto roomTypeIter = std::find(begin((*guardIter)->roomTypes), end((*guardIter)->roomTypes), Guard);
+		//Find current guard room
+		auto roomTypesIter = std::find(begin((*guardIter)->roomTypes), end((*guardIter)->roomTypes), Guard);
 		
-		if (roomTypeIter != end((*guardIter)->roomTypes))
-			(*guardIter)->roomTypes.erase(roomTypeIter);
+		//Remove the "Guard" type from the roomTypes
+		if (roomTypesIter != end((*guardIter)->roomTypes))
+			(*guardIter)->roomTypes.erase(roomTypesIter);
 		
+		//Move guard to next spot
 		std::advance(guardIter, 1);
 		if (guardIter == std::end(guardCenterRoomPtr->connectRooms))
 			guardIter = std::begin(guardCenterRoomPtr->connectRooms);
-		/*
-		(*guardIter)->AddRoomObject((std::static_pointer_cast<MazeObject>(std::shared_ptr<MazeGuard>(this))));
-		guardCurRoomPtr->RemoveRoomObject(std::static_pointer_cast<MazeObject>(std::shared_ptr<MazeGuard>(this)));
-		*/
-		(*guardIter)->roomType = Guard;
+		
+		//Change that room type to have "Guard"
 		(*guardIter)->roomTypes.push_back(Guard);
+
 		SetObjRoom(*guardIter);
-		//SetObjectRect(&curObjRoom->roomRect);
 	}
 
-	void SetGuardTexture()
-	{
-
-	}
 };
 

@@ -137,6 +137,7 @@
     <ClInclude Include="MazeGuard.h" />
     <ClInclude Include="MazeKey.h" />
     <ClInclude Include="MazeObject.h" />
+    <ClInclude Include="MazeTexture.h" />
     <ClInclude Include="MazeTrap.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
@@ -149,6 +150,7 @@
     <ClCompile Include="MazeGuard.cpp" />
     <ClCompile Include="MazeKey.cpp" />
     <ClCompile Include="MazeObject.cpp" />
+    <ClCompile Include="MazeTexture.cpp" />
     <ClCompile Include="MazeTrap.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />

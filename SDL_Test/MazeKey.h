@@ -6,6 +6,7 @@
 
 #pragma once
 #include "MazeObject.h"
+#include "MazeTexture.h"
 
 #define IMG_MAZEKEY "../res/Images/Key.png"
 class MazeKey :

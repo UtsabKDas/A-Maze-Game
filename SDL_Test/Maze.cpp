@@ -1,7 +1,5 @@
 #include "Maze.h"
 
-
-
 Maze::Maze(int xCount, int yCount, int xOffset, int yOffset, int xSize, int ySize, SDL_Renderer * renderer, int level, bool showCreation) :
 	mazeX_RoomCount(xCount), mazeY_RoomCount(yCount), mazeX_Offset(xOffset), mazeY_Offset(yOffset), mazeX_Size(xSize), mazeY_Size(ySize), mazeRenderer(renderer), mazeLevel(level)
 {
