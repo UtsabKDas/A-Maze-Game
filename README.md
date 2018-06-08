@@ -67,9 +67,15 @@ Created using
 
 #### Getting the Project
 
-- Download the project
-- Open the Solution in Microsoft Visual Studio 
- 	- Download [Visual Studio 2017] (https://www.visualstudio.com/downloads/) if needed
+- Download the project (click the **Clone or Download** dropdown)
+
+![AltText](https://i.imgur.com/pT80UJr.png)
+
+- Open the Solution in Microsoft Visual Studio (double click the **.sln file**)
+
+![AltText](https://i.imgur.com/O0Iun9d.png)
+
+	- Download [Visual Studio 2017] (https://www.visualstudio.com/downloads/) if needed
 - Change the Build Configuration to x86
 
 ![AltText](https://i.imgur.com/jU3OUEC.png)
