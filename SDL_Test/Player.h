@@ -34,8 +34,7 @@ public:
 	
 	bool hasKey = false;
 
-	//Sets the room the player is in
-	
+	//Sets the player back to start
 	void SetPlayerToStart(std::shared_ptr<Room> room)
 	{
 		hasKey = false;
