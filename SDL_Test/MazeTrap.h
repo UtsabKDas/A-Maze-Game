@@ -10,8 +10,8 @@
 #pragma once
 #include "MazeObject.h"
 
-#define IMG_TRAP_INACTIVE "../res/Images/SpikeTrapInactive.png"
-#define IMG_TRAP_ACTIVE "../res/Images/SpikeTrapActive.png"
+#define IMG_TRAP_INACTIVE "res/Images/SpikeTrapInactive.png"
+#define IMG_TRAP_ACTIVE "res/Images/SpikeTrapActive.png"
 
 class MazeTrap :
 	public MazeObject

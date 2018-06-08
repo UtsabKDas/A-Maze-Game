@@ -89,7 +89,9 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d  "$(ProjectDir)*.dll" "$(SolutionDir)$(Configuration)"</Command>
+      <Command>if not exist $(SolutionDir)$(Configuration)\res mkdir $(SolutionDir)$(Configuration)\res
+xcopy /y /d  "$(ProjectDir)*.dll" "$(SolutionDir)$(Configuration)"
+xcopy /y /e /d  "$(ProjectDir)res" "$(SolutionDir)$(Configuration)\res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -119,7 +121,9 @@
       <SubSystem>Console</SubSystem>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /y /d  "$(ProjectDir)*.dll" "$(SolutionDir)$(Configuration)"</Command>
+      <Command>if not exist $(SolutionDir)$(Configuration)\res mkdir $(SolutionDir)$(Configuration)\res
+xcopy /y /d  "$(ProjectDir)*.dll" "$(SolutionDir)$(Configuration)"
+xcopy /y /e /d  "$(ProjectDir)res" "$(SolutionDir)$(Configuration)\res"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,7 +147,6 @@
     <ClInclude Include="MazeGuard.h" />
     <ClInclude Include="MazeKey.h" />
     <ClInclude Include="MazeObject.h" />
-    <ClInclude Include="MazeTexture.h" />
     <ClInclude Include="MazeTrap.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Room.h" />
@@ -156,7 +159,6 @@
     <ClCompile Include="MazeGuard.cpp" />
     <ClCompile Include="MazeKey.cpp" />
     <ClCompile Include="MazeObject.cpp" />
-    <ClCompile Include="MazeTexture.cpp" />
     <ClCompile Include="MazeTrap.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Room.cpp" />

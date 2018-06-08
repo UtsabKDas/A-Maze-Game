@@ -7,7 +7,7 @@
 
 #pragma once
 #include "MazeObject.h"
-#define IMG_MAZEDOOR "../res/Images/Lock.png"
+#define IMG_MAZEDOOR "res/Images/Lock.png"
 class MazeDoor :
 	public MazeObject
 {

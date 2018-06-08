@@ -20,9 +20,9 @@
 //Make Global variables for things that will not chagne
 
 //PNG and Text files To Use in this 
-#define IMG_TITLE "../res/Images/Title.png"
-#define IMG_GAMEOVER "../res/Images/GameOver.png"
-#define TEXTFILE "../res/Text/TitleFont.ttf"
+#define IMG_TITLE "res/Images/Title.png"
+#define IMG_GAMEOVER "res/Images/GameOver.png"
+#define TEXTFILE "res/Text/TitleFont.ttf"
 
 //Display Variables. These are kept as variables to make it easier to 
 //manipulate and change as needed

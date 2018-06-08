@@ -14,10 +14,10 @@
 #include "MazeObject.h"
 #include "Room.h"
 
-#define IMG_PLAYER_RIGHT "../res/Images/PlayerRight.png"
-#define IMG_PLAYER_LEFT "../res/Images/PlayerLeft.png"
-#define IMG_PLAYER_UP "../res/Images/PlayerUp.png"
-#define IMG_PLAYER_DOWN "../res/Images/PlayerDown.png"
+#define IMG_PLAYER_RIGHT "res/Images/PlayerRight.png"
+#define IMG_PLAYER_LEFT "res/Images/PlayerLeft.png"
+#define IMG_PLAYER_UP "res/Images/PlayerUp.png"
+#define IMG_PLAYER_DOWN "res/Images/PlayerDown.png"
 
 class Player :
 	public MazeObject
