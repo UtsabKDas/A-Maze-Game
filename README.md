@@ -25,6 +25,7 @@ Contents
 - [SDL2 Libraries](#sdl2-libraries)
 - [Reflection](#reflection)
 - [Contact](#contact)
+- [Licenses](#licenses)
 
 
 ### Intro
@@ -213,6 +214,15 @@ I was able to learn a lot in this C++ Project. I had never used the SDL Librarie
 ### Contact
 ------------
 
+Contact me with any questions or concerns!
+
 Email: utsabkdas@gmail.com
 
 Website: https://utsabkdas.wixsite.com/portfolio
+
+### Licenses
+------------
+
+Other Licenses
+- [1001Fonts General Font Usage Terms](http://www.1001fonts.com/licenses/general-font-usage-terms.html)
+- [Simple DirectMedia Layer library License](https://www.libsdl.org/license.php)
