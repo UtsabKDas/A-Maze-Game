@@ -229,7 +229,7 @@ void DrawTextWithAdjCenteredNumber(std::string text, std::string count, int xOff
 }
 
 //Adds Multiple Rows of Text to the Renderer. 
-void DrawText_MultipleRows(std::vector<std::string> &text, std::vector<std::string> &data, int xOffset, int yOffset, int width, int height, int fontSize)
+void DrawTextMultipleRows(std::vector<std::string> &text, std::vector<std::string> &data, int xOffset, int yOffset, int width, int height, int fontSize)
 {
 	int rowCount = text.size();
 	int rowHeight = height / rowCount;
@@ -253,7 +253,7 @@ void DrawInGameGUI(std::string level, std::string steps, std::string lives)
 	std::vector<std::string> infoTexts = {"Level", "Steps", "Lives", "R to Reset", "ESC to Menu" };
 	std::vector<std::string> dataTexts =  { level, steps, lives };
 	DrawTextFromRect("A MAZE GAME", &GameTitleFillRect, GameTitle_FontSize);
-	DrawText_MultipleRows(infoTexts, dataTexts, GameInfo_xOffset, GameInfo_yOffset, GameInfo_Width, GameInfo_Height, 42);
+	DrawTextMultipleRows(infoTexts, dataTexts, GameInfo_xOffset, GameInfo_yOffset, GameInfo_Width, GameInfo_Height, 42);
 }
 
 //Draw in-game information with ints instead of Strings
@@ -320,7 +320,7 @@ bool LevelCompleteScreen(int steps, int deaths)
 	std::vector<std::string> levelComplete_DataRows = { std::to_string(steps), std::to_string(deaths) };
 
 	//Add Information To Renderer in Multiple Rows
-	DrawText_MultipleRows(levelComplete_TextRows, levelComplete_DataRows, levelCompleteInfoRect.x, levelCompleteInfoRect.y, levelCompleteInfoRect.w, levelCompleteInfoRect.h, 42);
+	DrawTextMultipleRows(levelComplete_TextRows, levelComplete_DataRows, levelCompleteInfoRect.x, levelCompleteInfoRect.y, levelCompleteInfoRect.w, levelCompleteInfoRect.h, 42);
 	SDL_RenderPresent(renderer);
 	SDL_Event * continueEvent = new SDL_Event;
 	
@@ -397,9 +397,10 @@ int main(int argc, char *argv[])
 		//Get the SDL Starting Event
 		SDL_Event * gameEvent = new SDL_Event;
 
-		//Front Screen Loop
+		//Game Running Loop
 		while (!quit && gameEvent->type != SDL_QUIT && curGameState >= Menu)
 		{
+			//Front End Menu Loop
 			while(!quit && gameEvent->type != SDL_QUIT && curGameState == Menu)
 			{
 				//Show the Front Screen
@@ -437,8 +438,8 @@ int main(int argc, char *argv[])
 				}
 				RenderAllGameObjects(curMaze, curPlayer, steps);
 			}
-
-			//Game Loop
+			
+			//Gameplay Loop
 			while (!quit && gameEvent->type != SDL_QUIT && curGameState == InGame)
 			{
 				//Do something when there is an event
@@ -513,38 +514,9 @@ int main(int argc, char *argv[])
 					}
 					RenderAllGameObjects(curMaze, curPlayer, steps);
 				}
-				/*
-				//If the player reaches the final position
-				if ((curPlayer->objPos == curMaze->finalPos && curPlayer->hasKey))
-				{
-					//Display level complete stats
-					quit = LevelCompleteScreen(steps, std::max(0, levelStartLives - curPlayer->playerLives));
-					if (quit)
-					{ 
-						break;
-					}
-					//Next Level Changes
-					SDL_RenderClear(renderer);
-					DrawInGameGUI();
-
-					//Store how many lives the player started with
-					levelStartLives = curPlayer->playerLives;
-					//Increment level count
-					level++;
-					//Reset Step Count
-					steps = 0;
-					//Increment Maze Size
-					mazeX+=1;
-					mazeY+=1;
-
-					curMaze->NextLevelMaze();
-
-					curPlayer->SetPlayerToStart(curMaze->FindRoomByPos(curMaze->startPos));
-				
-					RenderAllGameObjects(curMaze, curPlayer, steps);
-				}*/
 			}
-
+			
+			//Level Complete Loop
 			while (!quit && gameEvent->type != SDL_QUIT && curGameState == LevelComplete)
 			{
 				//Display level complete stats
@@ -575,7 +547,8 @@ int main(int argc, char *argv[])
 
 				RenderAllGameObjects(curMaze, curPlayer, steps);
 			}
-
+			
+			//Game Over Loop
 			while (!quit && gameEvent->type != SDL_QUIT && curGameState == GameOver)
 			{
 				quit = GameOverScreen();
