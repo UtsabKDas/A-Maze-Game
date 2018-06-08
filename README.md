@@ -223,6 +223,9 @@ Website: https://utsabkdas.wixsite.com/portfolio
 ### Licenses
 ------------
 
+This project is licensed under the [MIT License](https://github.com/ukdv12/A-Maze-Game/blob/master/LICENSE).
+
 Other Licenses
+- [Simple DirectMedia Layer Library License](https://www.libsdl.org/license.php)
 - [1001Fonts General Font Usage Terms](http://www.1001fonts.com/licenses/general-font-usage-terms.html)
-- [Simple DirectMedia Layer library License](https://www.libsdl.org/license.php)
+
