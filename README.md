@@ -23,7 +23,8 @@ Contents
 		- [MazeDoor](#MazeDoor)
 		- [MazeTrap](#MazeTrap)
 		- [MazeGuard](#MazeGuard)
-- [SDL2](#Libraries)
+- [SDL2](#SDL2Libraries)
+- [Reflection](#Reflection)
 - [Contact](#contact)
 - [License](#license)
 
@@ -52,7 +53,9 @@ When all lives have been lost, the game is over, and the only options are to qui
 
 Created using 
 - Microsoft Visual C++
+
 - Microsoft Visual Studio 2017
+
 - Simple DirectMedia Layer Development Libraries (version 2.0.8)
 - Miss Ellen Font (TrueType Font) created by Samuel Marcius 
 	- [Font Page] (http://www.1001fonts.com/miss-ellen-font.html)
@@ -63,7 +66,7 @@ Created using
 #### Getting the Project
 
 - Download the project
-- Open the Solution in Visual Studio 
+- Open the Solution in Microsoft Visual Studio 
  	- Download [Visual Studio 2017] (https://www.visualstudio.com/downloads/) if needed
 - Change the Build Configuration to x86
 
@@ -147,6 +150,7 @@ The `CarveMaze` function actually goes about creating the maze. It stores one of
 
 It continues this until it encounters a room with no `availRooms`, at which point it will pop off the top element of the vector, and check if the previous room in the path had any other available rooms. It continues this until all the rooms are `inMaze`.
 
+Maze Creation
 ![AltText](https://media.giphy.com/media/2zdVncFuJoZrQoQBAK/giphy.gif)
 
 As the rooms are placed, if the game has gone to a high enough level, the rooms where obstacles spawn will be selected and added to the `obstacleRooms` vector. These are spaced along the path a distance apart set by the `obstacleSpacing`. This number needs to be high enough so that a maze with obstacles is traversable. They are later created by the `CreateObject` function, which assigns these to the `objectsInMaze` vector. The type of obstacle created (`MazeTrap` or `MazeGuard`) is determined by the current level of the game and the number of connected rooms.
@@ -198,7 +202,23 @@ When the `PlayerMove` function is called, it returns a boolean `successfulMove` 
 If the move was successful, the main.cpp class has the player call its `CheckForObjects` function, with which the player checks if there is any object in the same position. If there is a key, `hasKey` is set to true. If there is an obstacle (Trap or Guard) the player loses a life and will restart at the startRoom.
 
 
-#### Reflection
+### SDL2
+--------
+
+SDL2 was used to actually display the game on screen. The SDL2 Libraries implemented here are
+
+- SDL2
+- SDL2_main
+- SDL2_image
+- SDL2_ttf
+
+### Reflection
 ---------------
 
 I was able to learn a lot in this C++ Project. I had never used the SDL Libraries before, and I feel much more comfortable with them. I want to dive further into SDL and see how to utilize it to create a simple 2D game engine. I plan to continue working on this project to make certain areas more efficient, while also implementing more obstacles with unique behaviors, creating mazes not confined to rectangular shapes, and changing the rendering method to be more realtime rather than turn based. Ultimately, this experience taught me a lot and I hope to take it further. 
+
+### Contact
+------------
+
+Email: utsabkdas@gmail.com
+Website: https://utsabkdas.wixsite.com/portfolio
