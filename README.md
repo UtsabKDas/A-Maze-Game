@@ -224,7 +224,7 @@ Contact me with any questions or concerns!
 
 Email: utsabkdas@gmail.com
 
-Website: https://utsabkdas.wixsite.com/portfolio
+LinkedIn: https://www.linkedin.com/in/utsabkdas/
 
 ### Licenses
 ------------
